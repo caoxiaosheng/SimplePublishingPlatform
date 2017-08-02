@@ -11,11 +11,15 @@
         beforeSend:function() {
             $('#addRepertoryProgress').show();
         },
-        success:function() {
-            
+        success:function(result) {
+            if (result.success === true) {
+                window.location.href = "/Public/Index?" + repertoryName;
+            } else {
+                alert("传输错误\r" + result.reason);
+            }
         },
         error: function (xmlHttpRequest, textStatus, errorThrown) {
-            alert("错误\r"+textStatus);
+            alert("传输错误\r"+textStatus);
         },
         complete:function() {
             $('#addRepertoryProgress').hide();

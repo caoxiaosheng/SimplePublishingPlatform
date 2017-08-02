@@ -9,5 +9,12 @@ namespace SimplePublishingPlatform.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Add(string repertoryName)
+        {
+            var result = new {success = true, reason = "重复了"};
+            return Json(result);
+        }
     }
 }
