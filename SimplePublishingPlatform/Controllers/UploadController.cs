@@ -1,5 +1,7 @@
-﻿using System.Web;
+﻿using System.IO;
+using System.Web;
 using System.Web.Mvc;
+using SimplePublishingPlatform.Extensions;
 
 namespace SimplePublishingPlatform.Controllers
 {
@@ -8,10 +10,15 @@ namespace SimplePublishingPlatform.Controllers
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase upload)
         {
+            var repertoryName= Request["repertoryName"];
+            var repertoryNamePath = Server.MapPath(repertoryName.GetRepertoryNamePath());
             //获取图片文件名
-            var fileName = System.IO.Path.GetFileName(upload.FileName);
-            var filePhysicalPath = Server.MapPath("~/"); //我把它保存在网站根目录的 upload 文件夹，需要在项目中添加对应的文件夹
-            filePhysicalPath = filePhysicalPath + fileName;
+            var fileName = Path.GetFileName(upload.FileName);
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return new HttpNotFoundResult();
+            }
+            var filePhysicalPath = Path.Combine(repertoryNamePath, fileName);
             upload.SaveAs(filePhysicalPath); //上传图片到指定文件夹
             var url = "/" + fileName;
             var ckEditorFuncNum = System.Web.HttpContext.Current.Request["CKEditorFuncNum"];

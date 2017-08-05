@@ -154,6 +154,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PublishController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Extensions\RepertoryPathHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

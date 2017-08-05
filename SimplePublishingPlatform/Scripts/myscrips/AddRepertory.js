@@ -13,9 +13,9 @@
         },
         success:function(result) {
             if (result.success === true) {
-                window.location.href = "/Public/Index?" + repertoryName;
+                window.location.href = "/Publish/Index?repertoryName=" + repertoryName;
             } else {
-                alert("传输错误\r" + result.reason);
+                alert("创建仓库时发生错误\r" + result.reason);
             }
         },
         error: function (xmlHttpRequest, textStatus, errorThrown) {

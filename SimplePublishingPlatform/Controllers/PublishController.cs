@@ -1,19 +1,32 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web.Mvc;
+using SimplePublishingPlatform.Extensions;
 
 namespace SimplePublishingPlatform.Controllers
 {
     public class PublishController : Controller
     {
         // GET: Publish
-        public ActionResult Index()
+        public ActionResult Index(string repertoryName)
         {
-            return View();
+            ViewBag.RepertoryName = repertoryName;
+            return View("Index");
         }
 
         [HttpPost]
         public ActionResult Add(string repertoryName)
         {
-            var result = new {success = true, reason = "重复了"};
+            string repertoryNamePath = Server.MapPath(repertoryName.GetRepertoryNamePath());
+            object result;
+            if (Directory.Exists(repertoryNamePath))
+            {
+                result = new { success = false, reason = "仓库名已存在" };
+            }
+            else
+            {
+                Directory.CreateDirectory(repertoryNamePath);
+                result = new { success = true, reason = "你真棒" };
+            }
             return Json(result);
         }
     }
