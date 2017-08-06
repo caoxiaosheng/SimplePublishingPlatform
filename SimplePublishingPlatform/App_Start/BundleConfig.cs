@@ -26,6 +26,13 @@ namespace SimplePublishingPlatform
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-fileinput").Include(
+                "~/Scripts/fileinput.min.js",
+                "~/Scripts/locales/zh.js"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap-fileinput/css").Include(
+                "~/Content/bootstrap-fileinput/css/fileinput.min.css"));
         }
     }
 }

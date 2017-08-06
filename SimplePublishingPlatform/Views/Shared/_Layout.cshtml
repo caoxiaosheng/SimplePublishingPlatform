@@ -7,7 +7,6 @@
     <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="/Scripts/myscrips/AddRepertory.js"></script>
 </head>
 <body>
     <div class="modal fade in" style="display: none" aria-hidden="true" id="addrepertory">
@@ -71,6 +70,9 @@
     </div>
 </div>
 
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="/Scripts/myscrips/AddRepertory.js"></script>
 <div class="container body-content">
     @RenderBody()
     <hr/>
@@ -78,10 +80,6 @@
         <p>&copy; @DateTime.Now.Year - 蜂巢网管发布平台</p>
     </footer>
 </div>
-
-
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 </body>
 </html>
