@@ -28,11 +28,11 @@ namespace SimplePublishingPlatform
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-fileinput").Include(
-                "~/Scripts/fileinput.min.js",
+                "~/Scripts/fileinput.js",
                 "~/Scripts/locales/zh.js"));
 
-            bundles.Add(new StyleBundle("~/Content/bootstrap-fileinput/css").Include(
-                "~/Content/bootstrap-fileinput/css/fileinput.min.css"));
+            bundles.Add(new StyleBundle("~/Content/bootstrap-fileinputcss").Include(
+                "~/Content/bootstrap-fileinput/css/fileinput.css"));
         }
     }
 }

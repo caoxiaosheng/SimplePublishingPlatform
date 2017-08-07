@@ -37,16 +37,16 @@ namespace SimplePublishingPlatform.Controllers
             var files = Request.Files;
             if (files.Count != 1)
             {
-                return Json(new { success = false, reason = "存在" + files.Count + "个文件" });
+                return Json(new { error = "存在" + files.Count + "个文件" });
             }
             var fileName = files[0].FileName;
             if (string.IsNullOrEmpty(fileName))
             {
-                return Json(new { success = false, reason = "文件名为空" });
+                return Json(new { error = "文件名为空" });
             }
             var filePhysicalPath = Path.Combine(repertoryNamePath, fileName);
             files[0].SaveAs(filePhysicalPath); //上传图片到指定文件夹
-            return Json(new { success = true, filename= fileName });
+            return Json(new {});
         }
     }
 }
