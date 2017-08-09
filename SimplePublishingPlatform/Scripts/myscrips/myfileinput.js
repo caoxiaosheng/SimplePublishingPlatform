@@ -28,10 +28,11 @@ var FileInput = function () {
             minFileCount: 0,
             maxFileCount: 1, //表示允许同时上传的最大文件个数
             enctype: 'multipart/form-data',
-            validateInitialCount: false
-            //layoutTemplates: {
-            //    actionUpload:""
-            //}
+            validateInitialCount: false,
+            layoutTemplates: {
+                actionUpload: "",
+                actionDelete:""
+            }
             //previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
             //msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
         });
@@ -45,10 +46,10 @@ var FileInput = function () {
             alert("上传错误\r" + msg);
             $(this).fileinput('clear');
         });
-        //导入文件上传完成之后的事件
-        control.on("filebatchuploadsuccess", function (event, data, previewId, index) {
+        ////导入文件上传完成之后的事件
+        //control.on("filebatchuploadsuccess", function (event, data, previewId, index) {
             
-        });
+        //});
     }
     return oFile;
 };

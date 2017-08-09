@@ -5,8 +5,8 @@
 <div class="row">
     <form role="form">
         <div class="form-group">
-            <label class="control-label" for="repertoryName">版本名称</label>
-            <input type="text" class="form-control input-sm" name="repertoryName" id="repertoryName" value="@ViewBag.RepertoryName" readonly="readonly" />
+            <label class="control-label" for="usedrepertoryname">版本名称</label>
+            <input type="text" class="form-control input-sm" name="usedrepertoryname" id="usedrepertoryname" value="@ViewBag.RepertoryName" readonly="readonly" />
         </div>
         <div class="form-group">
             <label class="control-label" for="updateDescription">更新内容描述</label>
@@ -15,14 +15,17 @@
         <div class="form-group">
             <label class="control-label" for="manual_file">使用手册</label>
             <input type="file" class="form-control" name="manual_file" id="manual_file"/>
-            <input type="text" class="hidden" id="manual_filepath" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="setup_file">安装包</label>
+            <input type="file" class="form-control" name="setup_file" id="setup_file"/>
         </div>
         <div class="form-group">
             <label class="control-label" for="publishckedit">更新内容详情</label>
             <textarea style="max-width: none" id="publishckedit"></textarea>
         </div>
 
-        <div class="btn btn-primary pull-right">发布</div>
+        <div class="btn btn-primary pull-right" onclick="publishversion(this)">发布</div>
     </form>
 </div>
 
@@ -36,7 +39,8 @@
     var repertory = '@ViewBag.RepertoryName';
     //初始化上传框
     var fileinput = new FileInput();
-    fileinput.Init("manual_file", '/Upload/UploadFile?repertoryName=' + repertory);
+    fileinput.Init("manual_file", '/Upload/UploadFile?repertoryName=' + repertory + '&secondDir=使用手册');
+    fileinput.Init("setup_file", '/Upload/UploadFile?repertoryName=' + repertory + '&secondDir=安装包');
     //初始化编辑框
     CKEDITOR.replace('publishckedit',
         {

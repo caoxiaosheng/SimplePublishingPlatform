@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -33,6 +34,7 @@ namespace SimplePublishingPlatform.Controllers
         public ActionResult UploadFile()
         {
             var repertoryName = Request["repertoryName"];
+            var secondDir = Request["secondDir"];
             var repertoryNamePath = Server.MapPath(repertoryName.GetRepertoryNamePath());
             var files = Request.Files;
             if (files.Count != 1)
@@ -44,7 +46,14 @@ namespace SimplePublishingPlatform.Controllers
             {
                 return Json(new { error = "文件名为空" });
             }
-            var filePhysicalPath = Path.Combine(repertoryNamePath, fileName);
+            var dirPath = Path.Combine(repertoryNamePath, secondDir);
+            if (Directory.Exists(dirPath) == false)
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            string type = fileName.Substring(fileName.LastIndexOf('.'));
+            fileName = secondDir + type;
+            var filePhysicalPath = Path.Combine(repertoryNamePath, secondDir, fileName);
             files[0].SaveAs(filePhysicalPath); //上传图片到指定文件夹
             return Json(new {});
         }

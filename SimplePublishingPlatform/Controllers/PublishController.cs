@@ -29,5 +29,17 @@ namespace SimplePublishingPlatform.Controllers
             }
             return Json(result);
         }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult PublishVersion()
+        {
+            var repertoryName = Request["repertoryName"];
+            var description = Request["description"];
+            var detail = Request["detail"];
+            object result;
+            result = new { success = true, reason = "你真棒" };
+            return Json(result);
+        }
     }
 }
