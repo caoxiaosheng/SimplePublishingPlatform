@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Threading;
 using System.Web.Mvc;
 using SimplePublishingPlatform.Extensions;
 
@@ -16,7 +18,7 @@ namespace SimplePublishingPlatform.Controllers
         [HttpPost]
         public ActionResult Add(string repertoryName)
         {
-            string repertoryNamePath = Server.MapPath(repertoryName.GetRepertoryNamePath());
+            string repertoryNamePath = repertoryName.GetRepertoryNameMapPath(Server);
             object result;
             if (Directory.Exists(repertoryNamePath))
             {
@@ -38,7 +40,18 @@ namespace SimplePublishingPlatform.Controllers
             var description = Request["description"];
             var detail = Request["detail"];
             object result;
-            result = new { success = true, reason = "你真棒" };
+            try
+            {
+                using (StreamWriter streamWriter = new StreamWriter(repertoryName.GetDetailHtmlFilePath(Server), false))
+                {
+                    streamWriter.Write(detail);
+                }
+                result = new { success = true, reason = "你真棒" };
+            }
+            catch (Exception e)
+            {
+                result = new { success = false, reason = "存储文件错误，"+ e.Message};
+            }
             return Json(result);
         }
     }

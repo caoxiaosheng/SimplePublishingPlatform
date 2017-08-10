@@ -13,7 +13,7 @@ namespace SimplePublishingPlatform.Controllers
         public ActionResult Upload(HttpPostedFileBase upload)
         {
             var repertoryName= Request["repertoryName"];
-            var repertoryNamePath = Server.MapPath(repertoryName.GetRepertoryNamePath());
+            var repertoryNamePath = repertoryName.GetRepertoryNameMapPath(Server);
             //获取图片文件名
             var fileName = Path.GetFileName(upload.FileName);
             if (string.IsNullOrEmpty(fileName))
@@ -22,7 +22,7 @@ namespace SimplePublishingPlatform.Controllers
             }
             var filePhysicalPath = Path.Combine(repertoryNamePath, fileName);
             upload.SaveAs(filePhysicalPath); //上传图片到指定文件夹
-            var url = "/" + fileName;
+            var url = repertoryName.GetRepertoryNameUrl() + "/" + fileName;
             var ckEditorFuncNum = System.Web.HttpContext.Current.Request["CKEditorFuncNum"];
             //上传成功后，我们还需要通过以下的一个脚本把图片返回到第一个tab选项
             return Content("<script>window.parent.CKEDITOR.tools.callFunction(" + ckEditorFuncNum + ", \"" + url +
@@ -35,7 +35,7 @@ namespace SimplePublishingPlatform.Controllers
         {
             var repertoryName = Request["repertoryName"];
             var secondDir = Request["secondDir"];
-            var repertoryNamePath = Server.MapPath(repertoryName.GetRepertoryNamePath());
+            var repertoryNamePath = repertoryName.GetRepertoryNameMapPath(Server);
             var files = Request.Files;
             if (files.Count != 1)
             {
