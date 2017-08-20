@@ -3,11 +3,15 @@ using System.IO;
 using System.Threading;
 using System.Web.Mvc;
 using SimplePublishingPlatform.Extensions;
+using SimplePublishingPlatform.Models;
+using SimplePublishingPlatform.Services;
 
 namespace SimplePublishingPlatform.Controllers
 {
     public class PublishController : Controller
     {
+        private readonly SoftwareVersionSerivce _serivce=new SoftwareVersionSerivce();
+        
         // GET: Publish
         public ActionResult Index(string repertoryName)
         {
@@ -20,7 +24,7 @@ namespace SimplePublishingPlatform.Controllers
         {
             string repertoryNamePath = repertoryName.GetRepertoryNameMapPath(Server);
             object result;
-            if (Directory.Exists(repertoryNamePath))
+            if (Directory.Exists(repertoryNamePath)||_serivce.IsVersionExist(repertoryName))
             {
                 result = new { success = false, reason = "仓库名已存在" };
             }
@@ -40,19 +44,37 @@ namespace SimplePublishingPlatform.Controllers
             var description = Request["description"];
             var detail = Request["detail"];
             object result;
-            try
+            if (_serivce.IsVersionExist(repertoryName))
             {
-                using (StreamWriter streamWriter = new StreamWriter(repertoryName.GetDetailHtmlFilePath(Server), false))
-                {
-                    streamWriter.Write(detail);
-                }
-                result = new { success = true, reason = "你真棒" };
+                result = new { success = false, reason = "版本已存在"};
             }
-            catch (Exception e)
+            else
             {
-                result = new { success = false, reason = "存储文件错误，"+ e.Message};
+                try
+                {
+                    string path = repertoryName.GetDetailHtmlFilePath(Server);
+                    using (StreamWriter streamWriter = new StreamWriter(path, false))
+                    {
+                        streamWriter.Write(detail);
+                    }
+                    _serivce.AddSoftwareVersion(new SoftwareVersion() { Description = description, DetailPath = path, VersionName = repertoryName });
+                    result = new { success = true, reason = "你真棒" };
+                }
+                catch (Exception e)
+                {
+                    result = new { success = false, reason = "存储文件错误，" + e.Message };
+                }
             }
             return Json(result);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _serivce.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
