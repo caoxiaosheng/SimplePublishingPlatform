@@ -16,7 +16,7 @@ namespace SimplePublishingPlatform.Controllers
             var lastSoft = _service.FindLastSoftwareVersion();
             if (lastSoft == null)
             {
-                lastSoft=new SoftwareVersion()
+                lastSoft=new SoftwareVersion
                 {
                     Description = "喵喵喵",
                     DetailPath = "#",
