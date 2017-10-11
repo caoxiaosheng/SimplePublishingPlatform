@@ -20,6 +20,11 @@ namespace SimplePublishingPlatform.Services
             return _softwareVersionContext.Versions.Any(item => item.VersionName == versionName);
         }
 
+        public SoftwareVersion FindLastSoftwareVersion()
+        {
+            return _softwareVersionContext.Versions.OrderByDescending(item => item.PublishTime).FirstOrDefault();
+        }
+
         public void Dispose()
         {
             _softwareVersionContext.Dispose();

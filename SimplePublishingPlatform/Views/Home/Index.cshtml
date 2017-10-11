@@ -1,11 +1,12 @@
-﻿@{
+﻿@model SimplePublishingPlatform.ViewModels.SoftwareVersionViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <div class="container" style="text-align: center">
-        <h1>HiveNMS v3.3.0.0 正式发布</h1>
-        <p class="lead">发布日期：@DateTime.Now.ToShortDateString()</p>
+        <h1>@Model.VersionName 正式发布</h1>
+        <p class="lead">发布日期：@Model.PublishTime.ToShortDateString()</p>
         <br/>
         <p>
             <a href="#" class="btn btn-primary btn-lg">立即获取 &raquo;</a>
@@ -17,7 +18,7 @@
     <div class="col-md-4">
         <h2>更新内容</h2>
         <p>
-            本版本主要更新了。。。。得到的得到的都淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的淡淡的
+            @Model.Description
         </p>
         <p><a class="btn btn-default" href="#">了解详情 &raquo;</a></p>
     </div>

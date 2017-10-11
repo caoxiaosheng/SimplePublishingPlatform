@@ -1,12 +1,31 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using AutoMapper;
+using SimplePublishingPlatform.Models;
+using SimplePublishingPlatform.Services;
+using SimplePublishingPlatform.ViewModels;
 
 namespace SimplePublishingPlatform.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SoftwareVersionSerivce _service= new SoftwareVersionSerivce();
+
         public ActionResult Index()
         {
-            return View();
+            var lastSoft = _service.FindLastSoftwareVersion();
+            if (lastSoft == null)
+            {
+                lastSoft=new SoftwareVersion()
+                {
+                    Description = "喵喵喵",
+                    DetailPath = "#",
+                    PublishTime = DateTime.MinValue,
+                    Id = -1,
+                    VersionName = "喵喵喵"
+                };
+            }
+            return View(Mapper.Map<SoftwareVersion,SoftwareVersionViewModel>(lastSoft));
         }
 
         public ActionResult About()
@@ -21,6 +40,15 @@ namespace SimplePublishingPlatform.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _service.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

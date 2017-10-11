@@ -10,7 +10,7 @@ namespace SimplePublishingPlatform.Controllers
 {
     public class PublishController : Controller
     {
-        private readonly SoftwareVersionSerivce _serivce=new SoftwareVersionSerivce();
+        private readonly SoftwareVersionSerivce _service=new SoftwareVersionSerivce();
         
         // GET: Publish
         public ActionResult Index(string repertoryName)
@@ -24,7 +24,7 @@ namespace SimplePublishingPlatform.Controllers
         {
             string repertoryNamePath = repertoryName.GetRepertoryNameMapPath(Server);
             object result;
-            if (Directory.Exists(repertoryNamePath)||_serivce.IsVersionExist(repertoryName))
+            if (Directory.Exists(repertoryNamePath)||_service.IsVersionExist(repertoryName))
             {
                 result = new { success = false, reason = "仓库名已存在" };
             }
@@ -44,7 +44,7 @@ namespace SimplePublishingPlatform.Controllers
             var description = Request["description"];
             var detail = Request["detail"];
             object result;
-            if (_serivce.IsVersionExist(repertoryName))
+            if (_service.IsVersionExist(repertoryName))
             {
                 result = new { success = false, reason = "版本已存在"};
             }
@@ -57,7 +57,7 @@ namespace SimplePublishingPlatform.Controllers
                     {
                         streamWriter.Write(detail);
                     }
-                    _serivce.AddSoftwareVersion(new SoftwareVersion() { Description = description, DetailPath = path, VersionName = repertoryName });
+                    _service.AddSoftwareVersion(new SoftwareVersion() { Description = description, DetailPath = path, VersionName = repertoryName,PublishTime = DateTime.Now});
                     result = new { success = true, reason = "你真棒" };
                 }
                 catch (Exception e)
@@ -72,7 +72,7 @@ namespace SimplePublishingPlatform.Controllers
         {
             if (disposing)
             {
-                _serivce.Dispose();
+                _service.Dispose();
             }
             base.Dispose(disposing);
         }
