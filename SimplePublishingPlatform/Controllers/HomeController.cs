@@ -9,7 +9,7 @@ namespace SimplePublishingPlatform.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly SoftwareVersionSerivce _service= new SoftwareVersionSerivce();
+        private readonly SoftwareVersionService _service= new SoftwareVersionService();
 
         public ActionResult Index()
         {

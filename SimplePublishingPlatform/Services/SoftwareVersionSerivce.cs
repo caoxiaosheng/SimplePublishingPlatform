@@ -5,7 +5,7 @@ using SimplePublishingPlatform.Models;
 
 namespace SimplePublishingPlatform.Services
 {
-    public class SoftwareVersionSerivce:IDisposable
+    public class SoftwareVersionService:IDisposable
     {
         private readonly SoftwareVersionContext _softwareVersionContext=new SoftwareVersionContext();
 

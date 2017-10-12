@@ -10,7 +10,7 @@ namespace SimplePublishingPlatform.Controllers
 {
     public class PublishController : Controller
     {
-        private readonly SoftwareVersionSerivce _service=new SoftwareVersionSerivce();
+        private readonly SoftwareVersionService _service=new SoftwareVersionService();
         
         // GET: Publish
         public ActionResult Index(string repertoryName)

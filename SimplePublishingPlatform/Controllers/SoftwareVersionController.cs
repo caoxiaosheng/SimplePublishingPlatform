@@ -9,8 +9,9 @@ namespace SimplePublishingPlatform.Controllers
     public class SoftwareVersionController : Controller
     {
         // GET: SoftwareVersion
-        public ActionResult Index()
+        public ActionResult Index(string versionName)
         {
+            ViewBag.VersionName = versionName;
             return View();
         }
     }
