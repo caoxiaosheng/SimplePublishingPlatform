@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SimplePublishingPlatform.DAL;
 using SimplePublishingPlatform.Models;
 
 namespace SimplePublishingPlatform.Services
 {
-    public class SoftwareVersionService:IDisposable
+    public class SoftwareVersionService
     {
         private readonly SoftwareVersionContext _softwareVersionContext=new SoftwareVersionContext();
 
@@ -25,9 +26,9 @@ namespace SimplePublishingPlatform.Services
             return _softwareVersionContext.Versions.OrderByDescending(item => item.PublishTime).FirstOrDefault();
         }
 
-        public void Dispose()
+        public List<SoftwareVersion> GetHistorySoftwareVersions()
         {
-            _softwareVersionContext.Dispose();
+            return _softwareVersionContext.Versions.OrderByDescending(item => item.PublishTime).ToList();
         }
     }
 }

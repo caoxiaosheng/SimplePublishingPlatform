@@ -162,6 +162,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PublishController.cs" />
     <Compile Include="Controllers\SoftwareVersionController.cs" />
@@ -563,6 +564,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Publish\Index.cshtml" />
     <Content Include="Views\SoftwareVersion\Index.cshtml" />
+    <Content Include="Views\SoftwareVersion\HistoryVersions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

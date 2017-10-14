@@ -41,14 +41,5 @@ namespace SimplePublishingPlatform.Controllers
 
             return View();
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _service.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

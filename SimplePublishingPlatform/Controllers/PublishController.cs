@@ -67,14 +67,5 @@ namespace SimplePublishingPlatform.Controllers
             }
             return Json(result);
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _service.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
