@@ -5,7 +5,7 @@ namespace SimplePublishingPlatform.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SimplePublishingPlatform.DAL.SoftwareVersionContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SimplePublishingPlatform.DAL.PublishingPlatformContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace SimplePublishingPlatform.Migrations
             ContextKey = "SimplePublishingPlatform.DAL.SoftwareVersionContext";
         }
 
-        protected override void Seed(SimplePublishingPlatform.DAL.SoftwareVersionContext context)
+        protected override void Seed(SimplePublishingPlatform.DAL.PublishingPlatformContext context)
         {
             //  This method will be called after migrating to the latest version.
 

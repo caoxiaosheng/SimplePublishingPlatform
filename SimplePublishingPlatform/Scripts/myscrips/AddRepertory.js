@@ -1,4 +1,4 @@
-﻿function addRepertory() {
+﻿function addRepertory(btn) {
     var repertoryName = $.trim($('#repertoryName').val());
     if (repertoryName === "") {
         $('#addrepertoryreplay').text("请输入版本名称");
@@ -8,7 +8,8 @@
         type:"post",
         url: "/Publish/Add",
         data: { "repertoryName": repertoryName },
-        beforeSend:function() {
+        beforeSend: function () {
+            $(btn).attr('disabled', "true");
             $('#addRepertoryProgress').show();
         },
         success:function(result) {
@@ -21,6 +22,7 @@
         },
         error: function (xmlHttpRequest, textStatus, errorThrown) {
             $('#addrepertoryreplay').text("传输错误," + textStatus);
+            $(btn).removeAttr('disabled');
         },
         complete:function() {
             $('#addRepertoryProgress').hide();
@@ -65,8 +67,6 @@ function publishversion(btn) {
         },
         error: function (xmlHttpRequest, textStatus, errorThrown) {
             alert("传输错误," + textStatus);
-        },
-        complete: function () {
             $(btn).removeAttr('disabled');
         }
     });

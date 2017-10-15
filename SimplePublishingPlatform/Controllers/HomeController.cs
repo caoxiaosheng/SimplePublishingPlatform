@@ -21,7 +21,6 @@ namespace SimplePublishingPlatform.Controllers
                     Description = "喵喵喵",
                     DetailPath = "#",
                     PublishTime = DateTime.MinValue,
-                    Id = -1,
                     VersionName = "喵喵喵"
                 };
             }

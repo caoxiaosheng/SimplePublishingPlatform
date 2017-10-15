@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "提交问题";
+}
+
+<div class="row" style="margin-top: 10px">
+    <div class="form-group">
+        <label class="control-label" for="versionOfOccurrence">发生问题的版本</label>
+        <input type="text" class="form-control" name="versionOfOccurrence" id="versionOfOccurrence" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="customer">客户名称</label>
+        <input type="text" class="form-control" name="customer" id="customer" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="problemDetail">问题详细描述</label>
+        <textarea style="max-width: none" class="form-control" id="problemDetail" placeholder="请输入问题详细描述，最多1000字" maxlength="1000" rows="8"></textarea>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="submitter">提交人</label>
+        <input type="text" class="form-control" name="submitter" id="submitter" />
+    </div>
+    <button class="btn btn-primary pull-right" onclick="submitProblem(this)">提交</button>
+</div>
+
+<script>
+    var submitProblem=function(btn) {
+        var versionOfOccurrence = $.trim($('#versionOfOccurrence').val());
+        var customer = $.trim($('#customer').val());
+        var problemDetail = $.trim($('#problemDetail').val());
+        var submitter = $.trim($('#submitter').val());
+        $.ajax({
+            type: "post",
+            url: "@Url.Action("Add","ProblemInfo")",
+            data: {
+                "versionOfOccurrence": versionOfOccurrence ,
+                "customer": customer,
+                "problemDetail": problemDetail,
+                "submitter": submitter
+            },
+            beforeSend: function () {
+                $(btn).attr("disabled", "true");
+            },
+            success: function (result) {
+                window.location.href = "/";
+            },
+            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                alert("传输错误," + textStatus);
+                $(btn).removeAttr('disabled');
+            }
+        });
+        return true;
+    }
+</script>

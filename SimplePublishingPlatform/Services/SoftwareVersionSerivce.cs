@@ -8,7 +8,7 @@ namespace SimplePublishingPlatform.Services
 {
     public class SoftwareVersionService
     {
-        private readonly SoftwareVersionContext _softwareVersionContext=new SoftwareVersionContext();
+        private readonly PublishingPlatformContext _softwareVersionContext=new PublishingPlatformContext();
 
         public void AddSoftwareVersion(SoftwareVersion softwareVersion)
         {

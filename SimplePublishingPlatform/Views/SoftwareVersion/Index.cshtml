@@ -5,8 +5,8 @@
 
 <div class="row" style="margin-top: 20px">
     <label style="font-size: 40px; float: left">@ViewBag.VersionName</label>
-    <a href="#" class="btn btn-primary" style="float: right;margin-right: 5px">下载软件</a>
-    <a href="#" class="btn btn-default" style="float: right; margin-right: 5px">查看手册</a>
+    <a href="@Url.Action("DownLoadPackage","Download", new { versionName = ViewBag.VersionName })" class="btn btn-primary" style="float: right;margin-right: 5px">下载软件</a>
+    <a href="@Url.Action("DownLoadSheet","Download", new { versionName = ViewBag.VersionName })" class="btn btn-default" style="float: right; margin-right: 5px">查看手册</a>
 </div>
 <div class="row">
     <h3><strong>更新内容详情</strong></h3>

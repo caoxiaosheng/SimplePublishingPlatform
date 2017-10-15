@@ -1,0 +1,34 @@
+﻿@model List<SimplePublishingPlatform.Models.ProblemInfo>
+
+@{
+    ViewBag.Title = "已提交的问题";
+}
+
+<style>
+    .table-hover > tbody > tr:hover > td {
+        background-color: #dcdcdc
+    }
+</style>
+
+<div class="row table-responsive">
+    <table class="table table-striped table-hover">
+        <tr>
+            <th style="width: 15%">客户名称</th>
+            <th style="width: 15%">发生问题的版本</th>
+            <th style="width: 50%">问题详细描述</th>
+            <th style="width: 10%">提交人</th>
+            <th style="width: 10%">提交时间</th>
+        </tr>
+        @foreach (var problem in Model)
+        {
+            <tr>
+                <td>@problem.Customer</td>
+                <td>@problem.VersionOfOccurrence</td>
+                <td style="font-size: 4px">@problem.ProblemDetail</td>
+                <td>@problem.ProblemState</td>
+                <td>@problem.Submitter</td>
+                <td>@problem.SubmitTime</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -4,9 +4,10 @@ using SimplePublishingPlatform.Models;
 
 namespace SimplePublishingPlatform.DAL
 {
-    public class SoftwareVersionContext:DbContext
+    public class PublishingPlatformContext:DbContext
     {
         public DbSet<SoftwareVersion> Versions { get; set; }
+        public DbSet<ProblemInfo> ProblemInfos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

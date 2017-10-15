@@ -26,7 +26,7 @@
                 </div>
                 <br />
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="addRepertory()">添加</button>
+                    <button type="button" class="btn btn-primary" onclick="addRepertory(this)">添加</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 </div>
                 <div class="progress" id="addRepertoryProgress" style="display: none">
@@ -50,7 +50,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="@Url.Action("HistoryVersions", "SoftwareVersion")">历史版本</a></li>
+                <li><a href="@Url.Action("HistoryVersions", "SoftwareVersion")">历史版本</a></li>
+                <li><a href="@Url.Action("HistoryProblems", "ProblemInfo")">已提交的问题</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">其他功能<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
